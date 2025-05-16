@@ -1,0 +1,9 @@
+# Ignorar node_modules y .env
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

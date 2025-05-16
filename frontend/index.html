@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLAYPLEX</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+    }
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px; /* Altura base */
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  min-height: 160px;
+}
+
+
+
+
+    .section-title {
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <h1 class="text-center mb-4">🎬 Bienvenido a PLAYPLEX</h1>
+    <p class="text-center">Accedé a cientos de películas, series, anime y más desde cualquier dispositivo.</p>
+
+    <h2 class="section-title">📚 Bibliotecas disponibles</h2>
+    <div class="row row-cols-1 row-cols-md-5 g-5">
+      <a href="peliculas.html" class="text-decoration-none text-white">
+  <div class="card h-100 bg-dark text-white">
+    <img src="./images/peliculas.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
+    <div class="card-body">
+      <h5 class="card-title">Películas</h5>
+    </div>
+  </div>
+</a>
+
+      <div class="col">
+        <a href="series.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/series.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Series">
+          <div class="card-body">
+            <h5 class="card-title">Series</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="retro.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/retro.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
+          <div class="card-body">
+            <h5 class="card-title">Series Retro</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="argentinas.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/argentinas.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
+          <div class="card-body">
+            <h5 class="card-title">Peliculas Argentinas</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="anime-peliculas.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/anime-peliculas.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
+          <div class="card-body">
+            <h5 class="card-title">Anime Películas</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="dibujos.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/dibujos.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
+          <div class="card-body">
+            <h5 class="card-title">Dibujos Animados</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="anime-peliculas.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/anime-series.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Anime Series">
+          <div class="card-body">
+            <h5 class="card-title">Anime Series</h5>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="infantiles.html" class="text-decoration-none text-white">
+        <div class="card h-100 bg-dark text-white">
+          <img src="./images/infantiles.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas Infantiles">
+          <div class="card-body">
+            <h5 class="card-title">Películas Infantiles</h5>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+
+    <h2 class="section-title">📺 Cómo visualizar el contenido</h2>
+    <ul>
+      <li><strong>Smart TV:</strong> Instalá la app Plex desde la tienda (LG, Samsung, Android TV).</li>
+      <li><strong>PC:</strong> Ingresá a <a href="https://app.plex.tv" target="_blank">https://app.plex.tv</a> desde tu navegador.</li>
+      <li><strong>Smartphone/Tablet:</strong> Bajá la app desde Play Store o App Store.</li>
+      <li><strong>Login:</strong> Usá tu cuenta de Plex (o creá una gratuita) y te habilitaremos el acceso.</li>
+    </ul>
+
+    <section class="container my-5 text-white">
+  <h2 class="mb-4">
+    <i class="bi bi-tv-fill me-2"></i>Preguntas Frecuentes
+  </h2>
+  <ul class="list-unstyled">
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿En cuántos dispositivos puedo ver contenido?</strong><br>
+      Podés visualizar en hasta <strong>dos dispositivos en simultáneo</strong>.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Necesito una cuenta paga para usar Plex?</strong><br>
+      No, <strong>el acceso a PLAYPLEX es gratuito</strong>, solo necesitás una cuenta Plex para acceder a las bibliotecas compartidas.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Qué dispositivos son compatibles con Plex?</strong><br>
+      Plex funciona en <strong>Smart TVs, celulares Android/iOS, navegadores web, PC, tablets y dispositivos como Chromecast o Fire TV</strong>.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿El contenido está en español?</strong><br>
+      Sí, todo el contenido está disponible en <strong>audio latino e inglés subtitulado</strong>, podés elegir el idioma.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Qué hago si no veo ninguna película o serie al entrar?</strong><br>
+      Asegurate de que tu cuenta haya sido <strong>autorizada previamente</strong>. Si no es así, completá el formulario para solicitar acceso.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Cómo encuentro el contenido compartido?</strong><br>
+      Luego de ingresar a Plex, andá a la sección "Bibliotecas" en el menú lateral y vas a ver las carpetas compartidas como <strong>Películas, Series, Anime, etc.</strong>
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Hay contenido para niños?</strong><br>
+      Sí, contamos con bibliotecas como <strong>Dibujos Animados</strong> y <strong>Películas Infantiles</strong>, pensadas especialmente para los más chicos.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Puedo descargar contenido para verlo sin conexión?</strong><br>
+      No por el momento. PLAYPLEX está pensado para <strong>ver en línea (streaming)</strong>.
+    </li>
+    <li class="mb-3">
+      <i class="bi bi-question-circle-fill text-primary me-2"></i>
+      <strong>¿Cada cuánto se actualiza el contenido?</strong><br>
+      El contenido se actualiza de forma <strong>periódica</strong>, con nuevos títulos agregados <strong>cada semana</strong>.
+    </li>
+  </ul>
+</section>
+
+    <div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card bg-dark text-white border-0 shadow-lg rounded-4">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4">📬 Solicitar acceso</h2>
+          <form id="accessForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" class="form-control form-control-lg bg-dark text-white border-secondary" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control form-control-lg bg-dark text-white border-secondary" id="email" name="email" required>
+            </div>
+            <div class="mb-4">
+              <label for="phone" class="form-label">Celular</label>
+              <input type="tel" class="form-control form-control-lg bg-dark text-white border-secondary" id="phone" name="phone" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 btn-lg">Solicitar acceso</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const form = document.getElementById('accessForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    try {
+      const res = await fetch('/invite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone })
+      });
+
+      if (res.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Listo!',
+          text: 'Te contactaremos pronto para darte acceso a PLAYPLEX.'
+        });
+        form.reset();
+      } else {
+        throw new Error('Error al enviar');
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo enviar la solicitud. Intentá de nuevo.'
+      });
+    }
+  });
+  
+</script>
+
+</body>
+</html>
