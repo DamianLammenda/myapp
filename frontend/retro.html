@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Series Retro - PLAYPLEX</title>
+  <title>Series Retro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="container py-4">
-    <h1 class="mb-4">Series Retro - PLAYPLEX</h1>
+    <h1 class="mb-4 text-center">Series Retro</h1>
 
     <div class="row" id="series-container"></div>
 
@@ -35,25 +35,13 @@
 
     async function cargarSeries() {
       try {
-        const response = await fetch('/api/biblioteca/15'); // Cambia esta URL si es necesario
-        const xmlText = await response.text();
-
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        const directories = xmlDoc.getElementsByTagName('Directory');
-
-        allSeries = Array.from(directories).map(dir => {
-          return {
-            title: dir.getAttribute('title'),
-            year: dir.getAttribute('year') || '',
-            thumb: dir.getAttribute('thumb')
-          };
-        });
+        const response = await fetch('/public/data/retro.json'); // Carga desde JSON local
+        allSeries = await response.json();
 
         mostrarPagina(currentPage);
       } catch (err) {
-        console.error('Error al cargar series:', err);
-        document.getElementById('series-container').innerHTML = '<p class="text-danger">Error al cargar las series.</p>';
+        console.error('Error al cargar series retro:', err);
+        document.getElementById('series-container').innerHTML = '<p class="text-danger">Error al cargar las series retro.</p>';
       }
     }
 
@@ -76,7 +64,7 @@
         img.className = 'img-fluid rounded-top';
         img.style.aspectRatio = '2 / 3';
         img.style.objectFit = 'cover';
-        img.src = `/api/thumb?path=${encodeURIComponent(series.thumb)}`;
+        img.src = `../public${series.thumb}` || '';  // ya es la ruta local en /img/retro/
         img.alt = series.title;
 
         const body = document.createElement('div');
@@ -85,7 +73,7 @@
         body.style.minHeight = '80px';
 
         const h5 = document.createElement('h5');
-        h5.className = 'card-title fs-6 mb-1';
+        h5.className = 'card-title text-center fs-6 mb-1';
         h5.textContent = `${series.title} (${series.year})`;
 
         body.appendChild(h5);
@@ -99,21 +87,21 @@
       document.getElementById('nextBtn').disabled = (end >= allSeries.length);
     }
 
-   document.getElementById('prevBtn').addEventListener('click', () => {
-  if (currentPage > 1) {
-    currentPage--;
-    mostrarPagina(currentPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-});
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        mostrarPagina(currentPage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
 
-document.getElementById('nextBtn').addEventListener('click', () => {
-  if (currentPage * itemsPerPage < allSeries.length) {
-    currentPage++;
-    mostrarPagina(currentPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-});
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentPage * itemsPerPage < allSeries.length) {
+        currentPage++;
+        mostrarPagina(currentPage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
 
     cargarSeries();
   </script>
