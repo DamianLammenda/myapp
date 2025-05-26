@@ -48,77 +48,77 @@
 
     <h2 class="section-title">📚 Bibliotecas disponibles</h2>
     <div class="row row-cols-1 row-cols-md-5 g-5">
-      <!-- <a href="peliculas.html" class="text-decoration-none text-white"> -->
+       <a href="peliculas.html" class="text-decoration-none text-white">
   <div class="card h-100 bg-dark text-white">
     <img src="./images/peliculas.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
     <div class="card-body">
       <h5 class="card-title">Películas</h5>
     </div>
   </div>
-<!-- </a> -->
+ </a>
 
       <div class="col">
-        <!-- <a href="series.html" class="text-decoration-none text-white"> -->
+        <a href="series.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/series.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Series">
           <div class="card-body">
             <h5 class="card-title">Series</h5>
           </div>
         </div>
-        <!-- </a> -->
+        </a>
       </div>
       <div class="col">
-        <!-- <a href="retro.html" class="text-decoration-none text-white"> -->
+         <a href="retro.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/retro.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
           <div class="card-body">
             <h5 class="card-title">Series Retro</h5>
           </div>
         </div>
-        <!-- </a> -->
+        </a> 
       </div>
       <div class="col">
-        <!-- <a href="argentinas.html" class="text-decoration-none text-white"> -->
+         <a href="argentinas.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/argentinas.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
           <div class="card-body">
             <h5 class="card-title">Peliculas Argentinas</h5>
           </div>
         </div>
-        <!-- </a> -->
+        </a>
       </div>
       <div class="col">
-        <!-- <a href="anime-peliculas.html" class="text-decoration-none text-white"> -->
+         <a href="anime-peliculas.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/anime-peliculas.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
           <div class="card-body">
             <h5 class="card-title">Anime Películas</h5>
           </div>
         </div>
-        <!-- </a> -->
+        </a>
       </div>
       <div class="col">
-        <!-- <a href="dibujos.html" class="text-decoration-none text-white"> -->
+         <a href="dibujos.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/dibujos.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas">
           <div class="card-body">
             <h5 class="card-title">Dibujos Animados</h5>
           </div>
         </div>
-        <!-- </a> -->
+         </a>
       </div>
       <div class="col">
-        <!-- <a href="anime-peliculas.html" class="text-decoration-none text-white"> -->
+        <a href="anime-series.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/anime-series.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Anime Series">
           <div class="card-body">
             <h5 class="card-title">Anime Series</h5>
           </div>
         </div>
-        <!-- </a> -->
+        </a> 
       </div>
       <div class="col">
-        <!-- <a href="infantiles.html" class="text-decoration-none text-white"> -->
+        <a href="infantiles.html" class="text-decoration-none text-white">
         <div class="card h-100 bg-dark text-white">
           <img src="./images/infantiles.jpg" class="img-fluid w-100 rounded-top object-fit-cover" style="aspect-ratio: 3/4;" alt="Películas Infantiles">
           <div class="card-body">
@@ -126,7 +126,7 @@
           </div>
         </div>
       </div>
-      <!-- </a> -->
+      </a>
     </div>
 
     <h2 class="section-title">📺 Cómo visualizar el contenido</h2>
@@ -190,13 +190,31 @@
   </ul>
 </section>
 
-    <div class="container my-5">
+<div class="text-center my-4">
+  <a href="calidad.html" class="btn btn-warning btn-lg">
+    <i class="bi bi-gear-fill me-2"></i>Configurar calidad de reproducción
+  </a>
+</div>
+
+<!-- Agregá el CSS/JS de Bootstrap y SweetAlert si no están -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
       <div class="card bg-dark text-white border-0 shadow-lg rounded-4">
         <div class="card-body p-4">
           <h2 class="card-title text-center mb-4">📬 Solicitar acceso</h2>
-          <form id="accessForm">
+          <form 
+            id="accessForm"
+            action="https://formsubmit.co/gestionusuarios05@gmail.com" 
+            method="POST"
+          >
+            <!-- Desactiva captcha de Formsubmit -->
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="index.html" />
+            <!-- Sin _next para no redirigir -->
+
             <div class="mb-3">
               <label for="name" class="form-label">Nombre</label>
               <input type="text" class="form-control form-control-lg bg-dark text-white border-secondary" id="name" name="name" required>
@@ -205,10 +223,17 @@
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control form-control-lg bg-dark text-white border-secondary" id="email" name="email" required>
             </div>
-            <div class="mb-4">
+            <div class="mb-3">
               <label for="phone" class="form-label">Celular</label>
               <input type="tel" class="form-control form-control-lg bg-dark text-white border-secondary" id="phone" name="phone" required>
             </div>
+
+            <!-- Comentarios opcionales -->
+            <div class="mb-4">
+              <label for="comments" class="form-label">Comentarios (opcional)</label>
+              <textarea class="form-control form-control-lg bg-dark text-white border-secondary" id="comments" name="comments" rows="3" placeholder="¿Algo que quieras contarnos?"></textarea>
+            </div>
+
             <button type="submit" class="btn btn-primary w-100 btn-lg">Solicitar acceso</button>
           </form>
         </div>
@@ -217,43 +242,27 @@
   </div>
 </div>
 
-
 <script>
   const form = document.getElementById('accessForm');
-  form.addEventListener('submit', async (e) => {
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    Swal.fire({
+      icon: 'success',
+      title: '¡Listo!',
+      text: 'Te contactaremos pronto para darte acceso a PLAYPLEX.'
+    }).then(() => {
+      form.submit();
 
-    try {
-      const res = await fetch('/invite', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone })
-      });
-
-      if (res.ok) {
-        Swal.fire({
-          icon: 'success',
-          title: '¡Listo!',
-          text: 'Te contactaremos pronto para darte acceso a PLAYPLEX.'
-        });
-        form.reset();
-      } else {
-        throw new Error('Error al enviar');
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No se pudo enviar la solicitud. Intentá de nuevo.'
-      });
-    }
+      // Recarga la página para limpiar el formulario
+      setTimeout(() => {
+        window.location.href = './index.html';
+      }, 500);
+    });
   });
-  
 </script>
+
 
 </body>
 </html>

@@ -3,18 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dibujos Animados - PLAYPLEX</title>
+  <title>Dibujos Animados</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #121212;
       color: white;
     }
+
+    .card-title {
+      font-size: 0.95rem;
+      text-align: center;
+      word-wrap: break-word;
+      white-space: normal;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-year {
+      font-size: 0.85rem;
+      text-align: center;
+      color: #aaa;
+    }
+
+    .card-body {
+      background-color: rgba(0, 0, 0, 0.7);
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
   <div class="container py-4">
-    <h1 class="mb-4">Dibujos Animados - PLAYPLEX</h1>
+    <h1 class="mb-4 text-center">Dibujos Animados</h1>
 
     <div class="row" id="series-container"></div>
 
@@ -35,20 +57,14 @@
 
     async function cargarSeries() {
       try {
-        const response = await fetch('/api/biblioteca/5'); // Cambia esta URL si es necesario
-        const xmlText = await response.text();
+        const response = await fetch('/public/data/dibujos.json');
+        const data = await response.json();
 
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        const directories = xmlDoc.getElementsByTagName('Directory');
-
-        allSeries = Array.from(directories).map(dir => {
-          return {
-            title: dir.getAttribute('title'),
-            year: dir.getAttribute('year') || '',
-            thumb: dir.getAttribute('thumb')
-          };
-        });
+        allSeries = data.map(item => ({
+          title: item.title,
+          year: item.year,
+          thumb: item.thumb.replace('/img/anime/', '/img/dibujos/')
+        }));
 
         mostrarPagina(currentPage);
       } catch (err) {
@@ -76,19 +92,22 @@
         img.className = 'img-fluid rounded-top';
         img.style.aspectRatio = '2 / 3';
         img.style.objectFit = 'cover';
-        img.src = `/api/thumb?path=${encodeURIComponent(series.thumb)}`;
+        img.src = `../public${series.thumb}`;
         img.alt = series.title;
 
         const body = document.createElement('div');
         body.className = 'card-body p-2';
-        body.style.backgroundColor = 'rgba(0,0,0,0.7)';
-        body.style.minHeight = '80px';
 
         const h5 = document.createElement('h5');
-        h5.className = 'card-title fs-6 mb-1';
-        h5.textContent = `${series.title} (${series.year})`;
+        h5.className = 'card-title text-center';
+        h5.textContent = series.title;
+
+        const year = document.createElement('p');
+        year.className = 'card-year';
+        year.textContent = series.year || 'Sin año';
 
         body.appendChild(h5);
+        body.appendChild(year);
         card.appendChild(img);
         card.appendChild(body);
         col.appendChild(card);
@@ -99,21 +118,21 @@
       document.getElementById('nextBtn').disabled = (end >= allSeries.length);
     }
 
-   document.getElementById('prevBtn').addEventListener('click', () => {
-  if (currentPage > 1) {
-    currentPage--;
-    mostrarPagina(currentPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-});
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        mostrarPagina(currentPage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
 
-document.getElementById('nextBtn').addEventListener('click', () => {
-  if (currentPage * itemsPerPage < allSeries.length) {
-    currentPage++;
-    mostrarPagina(currentPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-});
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentPage * itemsPerPage < allSeries.length) {
+        currentPage++;
+        mostrarPagina(currentPage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
 
     cargarSeries();
   </script>

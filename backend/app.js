@@ -5,62 +5,83 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 app.use(express.static('frontend'));
-
-// Configuración Plex
-const PLEX_SERVER = process.env.PLEX_SERVER;
-const PLEX_TOKEN = process.env.PLEX_TOKEN;
+//app.use(express.static(path.join(__dirname, '../frontend')));
 
 
-// Endpoint para obtener contenido de una biblioteca
-app.get('/api/biblioteca/:id', async (req, res) => {
-  const { id } = req.params;
-  const url = `${PLEX_SERVER}/library/sections/${id}/all?X-Plex-Token=${PLEX_TOKEN}`;
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
+const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 
+// ✅ Películas populares
+app.get('/api/peliculas', async (req, res) => {
   try {
-    const response = await axios.get(url, {
-      responseType: 'text',
-      headers: {
-        'Accept': 'application/xml'
+    const response = await axios.get(`${TMDB_BASE_URL}/movie/popular`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: 'es-MX',
+        page: 1
       }
     });
-    res.set('Content-Type', 'application/xml');
-    res.send(response.data);
-  } catch (error) {
-    console.error('Error al obtener datos de Plex:', error.message);
-    if (error.response) {
-      console.error('Código de estado:', error.response.status);
-      console.error('Respuesta:', error.response.data);
-    }
-    res.status(500).send('Error al obtener datos de Plex');
+    res.json(response.data.results);
+  } catch (err) {
+    console.error('Error al obtener películas:', err.message);
+    res.status(500).send('Error al obtener películas populares');
   }
 });
 
-app.get('/api/thumb', async (req, res) => {
-  const { path } = req.query;
-  if (!path) return res.status(400).send('Falta el parámetro "path"');
+// ✅ Series populares
+app.get('/api/series', async (req, res) => {
+  try {
+    const response = await axios.get(`${TMDB_BASE_URL}/tv/popular`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: 'es-ES',
+        page: 1
+      }
+    });
+    res.json(response.data.results);
+  } catch (err) {
+    console.error('Error al obtener series:', err.message);
+    res.status(500).send('Error al obtener series populares');
+  }
+});
 
-  const imageUrl = `${PLEX_SERVER}${path}?X-Plex-Token=${PLEX_TOKEN}`;
-  console.log('Cargando imagen desde:', imageUrl);
+// ✅ Buscar contenido (películas y series)
+app.get('/api/buscar', async (req, res) => {
+  const { query } = req.query;
+  if (!query) return res.status(400).send('Falta el parámetro "query"');
 
   try {
-    const response = await axios.get(imageUrl, {
-      responseType: 'arraybuffer'
+    const response = await axios.get(`${TMDB_BASE_URL}/search/multi`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: 'es-ES',
+        query,
+        page: 1,
+        include_adult: false
+      }
     });
-
-    res.set('Content-Type', response.headers['content-type']);
-    res.send(response.data);
-  } catch (error) {
-    console.error('Error al obtener imagen de Plex:', error.message);
-    res.status(500).send('Error al obtener imagen');
+    res.json(response.data.results);
+  } catch (err) {
+    console.error('Error en la búsqueda:', err.message);
+    res.status(500).send('Error al buscar contenido');
   }
 });
 
+// ✅ Obtener imagen (solo reenvía la URL de TMDb)
+app.get('/api/thumb', (req, res) => {
+  const { path, size } = req.query;
+  if (!path) return res.status(400).send('Falta el parámetro "path"');
 
+  const imageSize = size || 'w500';
+  const imageUrl = `https://image.tmdb.org/t/p/${imageSize}${path}`;
+  res.redirect(imageUrl);
+});
 
-
+// ✅ Envío de solicitud por mail
 app.post('/invite', async (req, res) => {
   const { name, email, phone } = req.body;
 
@@ -71,8 +92,8 @@ app.post('/invite', async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.MAIL_USER,      // ej: plexsender@gmail.com
-      pass: process.env.MAIL_PASS       // contraseña o app password
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS
     }
   });
 
@@ -100,5 +121,5 @@ app.post('/invite', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor activo en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor activo en http://localhost:${PORT}`);
 });
